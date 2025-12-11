@@ -7,10 +7,12 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import Header from "@/components/Header";
 import ReactMarkdown from "react-markdown";
+import { extractIdFromSlug } from "@/lib/slug";
 
 const BlogPost = () => {
-  const { id } = useParams();
-  const { data: post, isLoading } = useBlogPost(id || "");
+  const { slug } = useParams();
+  const id = slug ? extractIdFromSlug(slug) : "";
+  const { data: post, isLoading } = useBlogPost(id);
 
   if (isLoading) {
     return (

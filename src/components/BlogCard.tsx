@@ -5,14 +5,17 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Clock, Calendar } from "lucide-react";
+import { generateSlug } from "@/lib/slug";
 
 interface BlogCardProps {
   post: BlogPost;
 }
 
 const BlogCard = ({ post }: BlogCardProps) => {
+  const slug = generateSlug(post.title, post.id);
+  
   return (
-    <Link to={`/post/${post.id}`}>
+    <Link to={`/post/${slug}`}>
       <Card className="h-full transition-all hover:shadow-lg hover:scale-[1.02] duration-300 overflow-hidden">
         {post.cover_image && (
           <AspectRatio ratio={16 / 9} className="bg-muted">
